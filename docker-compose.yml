@@ -1,0 +1,15 @@
+name: 'flask-server'
+services:
+  flask:
+    build:
+      context: .
+      dockerfile: dockerfile
+    restart: unless-stopped
+    container_name: flask-app
+    env_file:
+      - .env
+    ports:
+      - '${FLASK_RUN_PORT}:${FLASK_RUN_PORT}'
+    volumes:
+      - .:/app
+    command: flask run --host=0.0.0.0
