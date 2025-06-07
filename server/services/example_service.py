@@ -1,12 +1,16 @@
-from flask import json
 import requests
 
+from server.decorators.execution_time_decorator import execution_time
+from server.utils.logger import logger
+from server.utils.singleton import Singleton
 
-class ExampleService:
+
+class ExampleService(metaclass=Singleton):
 
     def __init__(self):
-        pass
+        logger.info("ExampleService initialized")
 
+    @execution_time()
     def get_currencies(self):
         url = "https://restcountries.com/v3.1/all"
         response = requests.get(url)

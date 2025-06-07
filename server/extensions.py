@@ -1,4 +1,7 @@
-from flask_restx import Api
+from flask import Flask
+
+from server.resources import register_routes
 
 
-api = Api()
+def routes_setup(app: Flask):
+    register_routes(app)

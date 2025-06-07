@@ -1,5 +1,9 @@
 .env
+.env.*
 # Ignore all __pycache__ directories at any level
 **/__pycache__/
+venv
 venv/*
+flask
 flask/*
+run.sh

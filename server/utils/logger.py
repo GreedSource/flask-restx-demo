@@ -1,7 +1,9 @@
 import logging
 
+from server.utils.singleton import Singleton
 
-class ANSIColorFormatter(logging.Formatter):
+
+class ANSIColorFormatter(logging.Formatter, metaclass=Singleton):
     COLORS = {
         logging.DEBUG: "\033[96m",  # Cyan for DEBUG
         logging.INFO: "\033[92m",  # Green for INFO
@@ -33,13 +35,17 @@ class ANSIColorFormatter(logging.Formatter):
 
 
 # Create a custom logger
-logger = logging.getLogger("flask_app")
+logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
+logger.propagate = False
+
 
 # Create a console handler and set the formatter to the custom formatter
 console_handler = logging.StreamHandler()
 console_handler.setFormatter(
-    ANSIColorFormatter("%(asctime)s %(levelname)s %(message)s")
+    ANSIColorFormatter(
+        "%(asctime)s %(levelname)s %(filename)s:%(lineno)d in %(funcName)s() - %(message)s"
+    )
 )
 
 # Add the handler to the logger

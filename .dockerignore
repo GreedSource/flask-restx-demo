@@ -1,31 +1,36 @@
 # .dockerignore
 
 # Ignore specific config files
-.env
-dockerfile  # should be Dockerfile, ensure correct naming
 
-# Ignore all __pycache__ directories at any level
-**/__pycache__/
-__pycache__
+.env
+dockerfile # should be Dockerfile, ensure correct naming
+flask
+
+# Ignore all **pycache** directories at any level
+
+\*\*/**pycache**/
+**pycache**
 
 # Ignore common Python-related artifacts
-*.pyc
-*.pyo
-*.pyd
+
+_.pyc
+_.pyo
+_.pyd
 .Python
 env
 pip-log.txt
 pip-delete-this-directory.txt
 .tox
 .coverage
-.coverage.*
+.coverage._
 .cache
 nosetests.xml
 coverage.xml
-*.cover
-*.log
+_.cover
+_.log
 
 # Ignore version control and other tools
+
 .git
 .mypy_cache
 .pytest_cache

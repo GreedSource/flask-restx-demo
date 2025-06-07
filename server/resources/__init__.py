@@ -1,10 +1,10 @@
-from flask import Blueprint
+from flask import Flask
 from flask_restx import Api
-from .v1.api import api_resource  # Import the namespace
-from .v1.example_api import example_resource
+from .v1 import v1_api
+from .v2 import v2_api
 
 
-def register_routes(api: Api):
+def register_routes(app: Flask):
     """
     Registers all the API routes for the given API instance.
     """
@@ -14,5 +14,10 @@ def register_routes(api: Api):
     # Make sure the Namespace classes are imported correctly and have the necessary methods and decorators.
 
     # Add the namespace to the API instance
-    api.add_namespace(api_resource)  # Make sure api_resource is a Namespace
-    api.add_namespace(example_resource)  # Make sure example_resource is a Namespace
+
+    api = Api(app)
+
+    api.add_namespace(v1_api)
+    # app.register_blueprint(v1_api)
+    api.add_namespace(v2_api)
+    # app.register_blueprint(v2_api)
